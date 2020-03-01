@@ -4,7 +4,8 @@ server:
 remitly:
   shortly:
     expiration-days: 14
-    db-cleanup-cron: 0 0 12 * * ?
+    db-cleanup-cron: 0 0 12 * * ? # every day at 12pm
+    cache-eviction-cron: 0 0 0/2 * * ? #every 2 hours
 spring:
   cache:
     cache-names: urls

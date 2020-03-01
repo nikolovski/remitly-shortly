@@ -8,4 +8,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class ShortlyConfigurationProperties {
     Integer expirationDays;
     String dbCleanUpCron;
+    String cacheEvictionCron;
 }
