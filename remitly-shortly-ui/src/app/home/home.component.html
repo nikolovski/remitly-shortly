@@ -27,8 +27,8 @@
     <mat-card-title class="text-center">Here is your new shortened url</mat-card-title>
     <mat-card-content class="text-center">
       <div *ngIf="url" class="result">
-        <a [routerLink]="url?.shortened" target="_blank" >{{host}}/{{url?.shortened}}</a> (expires on {{url?.expires | date:'short'}})
-        <button mat-icon-button aria-label="Copy" (click)="copyToClipboard(host+'/'+url?.shortened)">
+        <a [routerLink]="url?.shortened" target="_blank" >{{host}}{{url?.shortened}}</a> (expires on {{url?.expires | date:'short'}})
+        <button mat-icon-button aria-label="Copy" (click)="copyToClipboard(host+''+url?.shortened)">
           <mat-icon>file_copy</mat-icon>
         </button>
       </div>
@@ -38,8 +38,8 @@
   <h3 *ngIf="history && history.length > 0" class="text-center">What you shortened before...</h3>
   <mat-card *ngFor="let item of history">
     <h2>
-      <a [routerLink]="item.shortened" target="_blank" >{{host}}/{{item.shortened}}</a>
-      <button mat-icon-button aria-label="Copy" (click)="copyToClipboard(host+'/'+item.shortened)">
+      <a [routerLink]="item.shortened" target="_blank" >{{host}}{{item.shortened}}</a>
+      <button mat-icon-button aria-label="Copy" (click)="copyToClipboard(host+''+item.shortened)">
         <mat-icon>file_copy</mat-icon>
       </button>
     </h2>

@@ -7,4 +7,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "remitly.shortly")
 public class ShortlyConfigurationProperties {
     Integer expirationDays;
+    String dbCleanUpCron;
 }

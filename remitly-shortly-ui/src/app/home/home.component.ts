@@ -24,8 +24,7 @@ export class HomeComponent implements OnInit {
               private router: Router,
               private _snackBar: MatSnackBar,
               @Inject(AppService) private mainService: AppService) {
-    this.host = window.location.protocol + '//' +
-      window.location.hostname + (window.location.port === '80' ?'':':' + window.location.port);
+    this.host = window.location.href;
   }
 
   ngOnInit() {
@@ -49,7 +48,8 @@ export class HomeComponent implements OnInit {
         window.open(result.original, "_self");
       }, (httpError: HttpErrorResponse) => {
         this.loadMain = true;
-        this._snackBar.open(httpError.error.message, 'Close', {duration: 3000, panelClass: "error-snackbar"});
+        this.router.navigateByUrl('/');
+        this._snackBar.open(httpError.error.message || httpError.error, 'Close', {duration: 3000, panelClass: "error-snackbar"});
       })
   }
 
@@ -75,5 +75,6 @@ export class HomeComponent implements OnInit {
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
+    this._snackBar.open('Copied to clipboard ('+url+')', null, {duration: 2000});
   }
 }

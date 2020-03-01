@@ -11,14 +11,13 @@ import java.util.Date;
 @Slf4j
 @Service
 public class DbMaintenanceService implements IDbMaintenanceService {
-
     ShortlyUrlRepository repository;
 
     public DbMaintenanceService(ShortlyUrlRepository repository) {
         this.repository = repository;
     }
 
-    @Scheduled(fixedDelay = 60000)
+    @Scheduled(cron = "${remitly.shortly.db-cleanup-cron}")
     @Override
     public void cleanUpExpiredShortUrls() {
         log.info("Deleting all expired short urls");
