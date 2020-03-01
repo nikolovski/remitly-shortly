@@ -8,6 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { HomeComponent } from './home/home.component';
 import {FormsModule} from "@angular/forms";
+import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import {FormsModule} from "@angular/forms";
     HttpClientModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    FormsModule
+    FormsModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

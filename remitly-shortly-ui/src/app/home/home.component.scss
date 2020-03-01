@@ -7,17 +7,10 @@ h1 {
   font-size: 64px;
   margin-bottom: 16px;
 }
-
-input {
-  border: 1px solid #cccccc;
-  padding: 8px;
+.input-form-field{
+  width: 80%;
+  margin-right: 15px;
 }
-
-button {
-  cursor: pointer;
-  border: 1px solid #888888;
-  background: #888888;
-  color: white;
-  padding: 8px;
-
+.text-center {
+  text-align: center;
 }

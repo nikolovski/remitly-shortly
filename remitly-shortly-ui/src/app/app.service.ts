@@ -18,4 +18,31 @@ export class AppService {
   getOriginalUrl(shortUrl: string): Observable<Url> {
     return this.http.get<Url>('/api/get-url/'+ shortUrl);
   }
+
+  saveInCookie(url: Url) {
+    document.cookie = "shortUrl "+url.shortened + "=" + url.original+" "+url.expires;
+  }
+
+  getShortUrlsFromCookies(): Array<Url> {
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const allCookies= decodedCookie.split(';');
+    const shortUrlCookies = allCookies.filter(cookie => cookie.includes("shortUrl"));
+    console.log(shortUrlCookies)
+    const shortUrls = new Array<Url>();
+
+    shortUrlCookies.forEach(shortUrlCookie  => {
+      let keyValue = shortUrlCookie.split('=');
+      let key = keyValue[0].trim();
+      let value = keyValue[1].trim();
+      let shortUrl = new Url();
+      console.log(key);
+      console.log(value)
+      shortUrl.shortened = key.split(' ')[1];
+      shortUrl.original = value.split(' ')[0];
+      shortUrl.expires = +value.split(' ')[1];
+      shortUrls.unshift(shortUrl);
+    });
+
+    return shortUrls;
+  }
 }

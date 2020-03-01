@@ -14,8 +14,9 @@ import {Url} from "../core/models/url.model";
 })
 export class HomeComponent implements OnInit {
 
-  hostname: string;
+  host: string;
   url: Url;
+  history: Array<Url>;
   toShorten: string;
   loadMain: boolean = true;
 
@@ -23,11 +24,17 @@ export class HomeComponent implements OnInit {
               private router: Router,
               private _snackBar: MatSnackBar,
               @Inject(AppService) private mainService: AppService) {
-    this.hostname = window.location.hostname;
+    this.host = window.location.protocol + '//' +
+      window.location.hostname + (window.location.port === '80' ?'':':' + window.location.port);
   }
 
   ngOnInit() {
     this.redirectListener();
+    this.getHistory();
+  }
+
+  private getHistory(): void {
+    this.history = this.mainService.getShortUrlsFromCookies();
   }
 
   private redirectListener(): void {
@@ -40,22 +47,33 @@ export class HomeComponent implements OnInit {
       )
       .subscribe( result => {
         window.open(result.original, "_self");
-      }, (error: HttpErrorResponse) => {
+      }, (httpError: HttpErrorResponse) => {
         this.loadMain = true;
-        this._snackBar.open(error.message, 'Close', {duration: 2000, panelClass: "error-snackbar"});
+        this._snackBar.open(httpError.error.message, 'Close', {duration: 3000, panelClass: "error-snackbar"});
       })
   }
 
   onSubmit(event) {
     event.preventDefault();
     if(!this.toShorten) {
-      this._snackBar.open("Please provide url to be shortened");
+      this._snackBar.open("Please provide url to be shortened", 'Close', {duration: 3000});
       return;
     }
     this.mainService.createShortUrl(this.toShorten).subscribe(url => {
       this.url = url;
-    }, error => {
-      this._snackBar.open(error.message, 'Close', {duration: 2000, panelClass: "error-snackbar"});
+      this.mainService.saveInCookie(url);
+      this.getHistory();
+    }, (httpError: HttpErrorResponse) => {
+      this._snackBar.open(httpError.error.message, 'Close', {duration: 3000, panelClass: "error-snackbar"});
     });
+  }
+
+  copyToClipboard(url: string) {
+    const el = document.createElement('textarea');
+    el.value = url;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
   }
 }

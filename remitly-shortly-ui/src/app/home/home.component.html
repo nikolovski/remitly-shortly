@@ -1,15 +1,53 @@
 <div *ngIf="loadMain">
-  <header>
-    <h1>Remitly Shortly</h1>
-    <h3>The best url shortner out there!</h3>
-  </header>
-  <p>Enter the url to be shortened below</p>
-  <form (ngSubmit)="onSubmit($event)" #shortenUrlForm="ngForm">
-    <input type="text" placeholder="URL" [(ngModel)]="toShorten" name="url">
-    <button type="submit">Shorten</button>
-  </form>
-  <p *ngIf="url">Here is your shortened url:</p>
-  <div *ngIf="url" class="result">
-    {{hostname}}/{{url?.shortened}}
-  </div>
+
+  <mat-card>
+
+    <mat-card-header>
+      <header>
+        <h1>Remitly Shortly</h1>
+        <h3>The best url shortener!</h3>
+      </header>
+    </mat-card-header>
+    <mat-card-title class="text-center">
+      Enter the url to be shortened below
+    </mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit($event)" #shortenUrlForm="ngForm">
+        <mat-form-field class="input-form-field">
+          <mat-label>URL</mat-label>
+          <textarea matInput type="text" [(ngModel)]="toShorten" name="url"></textarea>
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit">Shorten</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <br>
+  <h3 class="text-center">What you shortened before...</h3>
+  <mat-card *ngIf="url">
+    <mat-card-title class="text-center">Here is your new shortened url</mat-card-title>
+    <mat-card-content class="text-center">
+      <div *ngIf="url" class="result">
+        <a [routerLink]="url?.shortened" target="_blank" >{{host}}/{{url?.shortened}}</a> (expires on {{url?.expires | date:'short'}})
+        <button mat-icon-button aria-label="Copy" (click)="copyToClipboard(host+'/'+url?.shortened)">
+          <mat-icon>file_copy</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <br>
+  <mat-card *ngFor="let item of history">
+    <h2>
+      <a [routerLink]="item.shortened" target="_blank" >{{host}}/{{item.shortened}}</a>
+      <button mat-icon-button aria-label="Copy" (click)="copyToClipboard(host+'/'+item.shortened)">
+        <mat-icon>file_copy</mat-icon>
+      </button>
+    </h2>
+    <h4>
+      {{item.original}}
+    </h4>
+    <h5>
+      Expires: {{item.expires | date:'short'}}
+    </h5>
+  </mat-card>
 </div>
