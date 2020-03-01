@@ -1,0 +1,24 @@
+server:
+  error:
+    include-stacktrace: on_trace_param
+remitly:
+  shortly:
+    expiration-days: 14
+spring:
+  cache:
+    cache-names: urls
+---
+spring:
+  profiles: dev
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: local
+---
+spring:
+  profiles: in-memory-db
+
+---
+spring:
+  profiles: cloud
