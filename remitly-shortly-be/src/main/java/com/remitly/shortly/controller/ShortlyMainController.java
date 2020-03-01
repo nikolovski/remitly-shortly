@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@RequestMapping("/")
+@RequestMapping("/api")
 @RestController
 public class ShortlyMainController {
 
