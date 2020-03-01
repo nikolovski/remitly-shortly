@@ -1,0 +1,6 @@
+applications:
+  - name: remitly-shortly-ui
+    memory: 128MB
+    instances: 1
+    buildpacks:
+      - staticfile_buildpack

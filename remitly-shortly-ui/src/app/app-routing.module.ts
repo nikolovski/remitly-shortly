@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {AppComponent} from "./app.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from "./home/home.component";
 
 
 const routes: Routes = [
-  {path: ":shortUrl", component: AppComponent},
-  {path: '', component: AppComponent}
+  {path: ":shortUrl", component: HomeComponent },
+  {path: '', component: HomeComponent}
 
 ];
 

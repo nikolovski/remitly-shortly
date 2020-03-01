@@ -1,0 +1,15 @@
+<div *ngIf="loadMain">
+  <header>
+    <h1>Remitly Shortly</h1>
+    <h3>The best url shortner out there!</h3>
+  </header>
+  <p>Enter the url to be shortened below</p>
+  <form (ngSubmit)="onSubmit($event)" #shortenUrlForm="ngForm">
+    <input type="text" placeholder="URL" [(ngModel)]="toShorten" name="url">
+    <button type="submit">Shorten</button>
+  </form>
+  <p *ngIf="url">Here is your shortened url:</p>
+  <div *ngIf="url" class="result">
+    {{hostname}}/{{url?.shortened}}
+  </div>
+</div>

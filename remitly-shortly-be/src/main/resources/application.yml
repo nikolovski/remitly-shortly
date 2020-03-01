@@ -7,14 +7,15 @@ remitly:
 spring:
   cache:
     cache-names: urls
+  profiles:
+    active: dev,default
 ---
 spring:
   profiles: dev
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      database: local
+      uri: mongodb+srv://test:<pass>@cluster0-7rakj.mongodb.net/test?retryWrites=true&w=majority
+      database: shortly
 ---
 spring:
   profiles: in-memory-db
