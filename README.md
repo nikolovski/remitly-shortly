@@ -16,10 +16,19 @@ Navigate to `remitly-shortly-ui` and run
 npm install
 ```
 #### Run the scripts
-Run `scripts/run-demo.bat` or `scripts/run-demo.sh` depending on your OS
+Run the corresponding script for your OS
+
+MacOS/Unix/Linux
 ```bash
-sh scripts/run
+cd scripts
+sh run-demo.sh
 ```
+Windows
+```batch
+cd scripts
+run-demo.bat
+```
+
 #### Open `localhost:4200`
 Open `localhost:4200` and the application should load
 
