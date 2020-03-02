@@ -8,9 +8,9 @@ An URL shortening service
 1. [JRE 8](https://www.oracle.com/java/technologies/javase-jre8-downloads.html) or [JDK 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
 2. [NodeJS](https://nodejs.org/dist/v12.16.1/node-v12.16.1-x64.msi)
 
-### Set the test db password
+#### Set the test db password
 Set the test db password same as the user [test] in the `remitly-shortly-api/src/main/resources/application.yml`
-### Run `npm install`
+#### Run `npm install`
 Navigate to `remitly-shortly-ui` and run
 ```bash
 npm install
